@@ -3,4 +3,3 @@ function [outputArg1,outputArg2] = myNearestNeighbourInterpolation(inputArg1,inp
 outputArg1 = inputArg1;
 outputArg2 = inputArg2;
 end
-
