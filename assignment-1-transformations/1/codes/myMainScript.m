@@ -1,5 +1,8 @@
 %% MyMainScript
 
+% This script generates result for Q1.
+% There is an interval of 10s between image generation for each subpart.
+
 %% PART (a)
 
 imgPath = "..\data\circles_concentric.png";
@@ -28,4 +31,9 @@ axis on;
 % displays the enlarged image
 figure, myBilinearInterpolation(img);
 
+%%
+pause(10);
+
 %% PART (c)
+
+figure, myNearestNeighbourInterpolation(img);
