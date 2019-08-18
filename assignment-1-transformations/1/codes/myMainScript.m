@@ -14,8 +14,18 @@ d2 = 3;
 figure, myShrinkImageByFactorD(img, d1);
 figure, myShrinkImageByFactorD(img, d2);
 
+%%
+pause(10);
+
 %% PART (b)
 
-%imgPath = "..\data\barbaraSmall.png";
+imgPath = "..\data\barbaraSmall.png";
+img = imread(imgPath);
+% displays the original image
+imshow(img);
+axis image;
+axis on;
+% displays the enlarged image
+figure, myBilinearInterpolation(img);
 
 %% PART (c)
