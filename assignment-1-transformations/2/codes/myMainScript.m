@@ -33,6 +33,37 @@ figure, imshow(maskedImage);
 axis image;
 axis on;
 
+%% Part (b)
+
+imshow(image1);
+axis image;
+axis on;
+figure, myLinearContrastStretching(image1);
+
+
+figure, imshow(image2);
+axis image;
+axis on;
+figure, myLinearContrastStretching(image2);
+
+
+figure, imshow(image3);
+axis image;
+axis on;
+figure, myLinearContrastStretching(image3);
+
+
+figure, imshow(image5);
+axis image;
+axis on;
+figure, myLinearContrastStretching(image5);
+
+
+figure, imshow(image6);
+axis image;
+axis on;
+figure, myLinearContrastStretching(image6);
+
 %% Part (c)
 
 % Image 1
