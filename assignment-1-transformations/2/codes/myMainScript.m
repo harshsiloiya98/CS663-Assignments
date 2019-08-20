@@ -96,5 +96,15 @@ image4RefMask = imread('../data/retinaRefMask.png');
 
 
 
+%% (d) Histogram Matching (HM)
+
+
+% figure(18), imshow(image4 .* uint8(image4Mask)), colorbar, title('(d) Original Image 4');
+% 
+% figure(19), imshow(myHM(image4 .* uint8(image4Mask), image4Ref .* uint8(image4RefMask))), colorbar, title('(d) Contrast-Enhanced Image 4');
+
+
+
+
 %% End
 toc;
