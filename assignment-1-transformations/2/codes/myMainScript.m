@@ -105,6 +105,15 @@ image4RefMask = imread('../data/retinaRefMask.png');
 
 
 
+%% (e) Contrast-Limited Adaptive Histogram Equalization (CLAHE)
+
+
+figure(20), imshow(image3), colorbar, title('(e) Original Image 4');
+
+figure(21), imshow(myCLAHE(image3, 200, 0.01)), colorbar, title('(e) Contrast-Enhanced Image 4');
+
+
+
 
 %% End
 toc;
