@@ -1,40 +1,67 @@
 %% MyMainScript
 
+image1 = imread('../data/barbara.png');
+image2 = imread('../data/TEM.png');
+image3 = imread('../data/canyon.png');
+image4 = imread('../data/retina.png');
+image5 = imread('../data/church.png');
+image6 = imread('../data/chestXray.png');
+image7 = imread('../data/statue.png');
+
+image4Ref = imread('../data/retinaRef.png');
+image4Mask = imread('../data/retinaMask.png');
+image4RefMask = imread('../data/retinaRefMask.png');
+
+
+%% Part (a)
+
+% original image
+imshow(image7);
+axis image;
+axis on;
+
+% binary mask
+binaryMask = myForegroundMask(image7);
+figure, imshow(binaryMask);
+axis image;
+axis on;
+
+% masked image
+binaryMask = cast(binaryMask, class(image7));
+maskedImage = image7 .* binaryMask;
+figure, imshow(maskedImage);
+axis image;
+axis on;
 
 %% Part (c)
 
 % Image 1
-imgPath1 = "..\data\barbara.png";
-img1 = imread(imgPath1);
-imshow(img1);
-axis image;
-axis on;
-figure, myHE(img1);
 
-imgPath2 = "..\data\TEM.png";
-img2 = imread(imgPath2);
-figure, imshow(img2);
+imshow(image1);
 axis image;
 axis on;
-figure, myHE(img2);
+figure, myHE(image1);
 
-imgPath3 = "..\data\canyon.png";
-img3 = imread(imgPath3);
-figure, imshow(img3);
-axis image;
-axis on;
-figure, myHE(img3);
 
-imgPath5 = "..\data\church.png";
-img5 = imread(imgPath5);
-figure, imshow(img5);
+figure, imshow(image2);
 axis image;
 axis on;
-figure, myHE(img5);
+figure, myHE(image2);
 
-imgPath6 = "..\data\chestXray.png";
-img6 = imread(imgPath6);
-figure, imshow(img6);
+
+figure, imshow(image3);
 axis image;
 axis on;
-figure, myHE(img6);
+figure, myHE(image3);
+
+
+figure, imshow(image5);
+axis image;
+axis on;
+figure, myHE(image5);
+
+
+figure, imshow(image6);
+axis image;
+axis on;
+figure, myHE(image6);
