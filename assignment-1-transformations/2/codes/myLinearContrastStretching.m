@@ -1,14 +1,15 @@
-function output = myLinearContrastStretching(image)
-    image = im2double(image);
-    [I,J,K] = size(image);
-    output = zeros(I,J,K);
-    for k=1:K
-        maxvalue = max(max(image(:,:,k)));
-        minvalue = min(min(image(:,:,k)));
-        for i=1:I
-            for j=1:J               
-                output(i,j,k) = ((image(i,j,k) - minvalue)) / (maxvalue - minvalue);
-            end
-        end
-    end
+function out = myLinearContrastStretching(img)
+% Enhances the intensity contrast of the image
+
+[r, c, channels] = size(img);
+out = zeros(r, c, channels);
+img = im2double(img);
+
+% looping through the channels
+for i = 1:channels
+    maxvalue = max(max(img(:, :, i)));
+    minvalue = min(min(img(:, :, i)));
+    out(:, :, i) = (img(:, :, i) - minvalue) / (maxvalue - minvalue);
+end
+
 end

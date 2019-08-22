@@ -1,29 +1,43 @@
-function output = myHM(image, ref)
-    [I,J,K] = size(image);
-    output = zeros(I,J,K);
-    for k=1:K
-        hist = imhist(image(:,:,k));
-        cdf = cumsum(hist);
-        cdf_norm = (cdf ./ max(cdf)) .* 255;
-        
-        histRef = imhist(ref(:,:,k));
-        cdfRef = cumsum(histRef);
-        cdf_normRef = (cdfRef ./ max(cdfRef)) .* 255;
-        
-        match = zeros(256);
-        for i=1:256
-            [~,index] = min(abs(cdf_normRef-cdf_norm(i)));
-            match(i) = index;
-        end
-        
-        for i=1:I
-            for j=1:J
-                index = image(i,j,k);
-                output(i,j,k) = match(index+1);
-            end
-        end
-    end
-    output = mat2gray(output);
+function finalNewImg = myHM(input_img, ref_img)
+% performs histogram matching between two images
+
+[r1, c1, channels] = size(input_img);
+[r2, c2, ~] = size(ref_img);
+finalNewImg = zeros(r1, c1, channels);
+
+% number of pixels per channel
+num_pixels1 = r1 * c1;
+num_pixels2 = r2 * c2;
+
+% Initializing the mapping
+M = zeros(256, 1);
+
+for i = 1:channels
+   [counts1, ~] = imhist(input_img(:, :, i));
+   [counts2, ~] = imhist(ref_img(:, :, i));
+   tmp_img = input_img(:, :, i);
+   
+   % calculating the PDFs and CDFs of histograms
+   pdf1 = counts1 / num_pixels1;
+   cdf1 = cumsum(pdf1);
+   pdf2 = counts2 / num_pixels2;
+   cdf2 = cumsum(pdf2);
+   
+   % calculating the mapping
+   for j = 1:256
+       [~, ind] = min(abs(cdf1(j) - cdf2));
+       M(j) = ind - 1;
+   end
+   
+   % applying the mapping on original image
+   range = 1:num_pixels1;
+   newImg = M(tmp_img(range) + 1);
+   newImg = reshape(newImg, [r1, c1]);
+   
+   finalNewImg(:, :, i) = newImg;
 end
 
-% https://stackoverflow.com/questions/26763974/histogram-matching-of-two-images-without-using-histeq
+% converting matrix to image
+finalNewImg = cast(finalNewImg, class(input_img));
+
+end

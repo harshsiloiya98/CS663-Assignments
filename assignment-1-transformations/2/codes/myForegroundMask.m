@@ -1,14 +1,11 @@
-function mask = myForegroundMask(image)
-    [I,J,K] = size(image);
-    mask = zeros(I,J,K);
-    for i=1:I
-        for j=1:J
-            for k=1:K
-                if image(i,j,k) > 5
-                    mask(i,j,k) = 1;
-                else
-                    mask(i,j,k) = 0;
-                end
-            end
-        end
-    end
+function mask = myForegroundMask(img)
+% generates the binary mask for image
+
+[r, c] = size(img);
+mask = zeros(r, c);
+threshold_intensity = 15;
+
+% filters out the intensities which are lower than 15
+mask(img > threshold_intensity) = 1;
+
+end

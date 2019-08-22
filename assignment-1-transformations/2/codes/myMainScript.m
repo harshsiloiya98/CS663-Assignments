@@ -1,7 +1,4 @@
 %% MyMainScript
-clc;
-clear;
-tic;
 
 image1 = imread('../data/barbara.png');
 image2 = imread('../data/TEM.png');
@@ -15,105 +12,188 @@ image4Ref = imread('../data/retinaRef.png');
 image4Mask = imread('../data/retinaMask.png');
 image4RefMask = imread('../data/retinaRefMask.png');
 
-%% (a) Foreground Mask
 
-% mask7 = myForegroundMask(image7);
-% 
-% figure(1), imshow(image7), title('(a) Original Image');
-% 
-% figure(2), imshow(mask7), title('(a) Binary Mask');
-% 
-% figure(3), imshow(image7.*uint8(mask7)), title('(a) Masked Image');
+%% Part (a)
 
+% original image
+imshow(image7);
+colorbar;
+axis image;
+axis on;
 
-%% (b) Linear Contrast Stretching
+% binary mask
+binaryMask = myForegroundMask(image7);
+figure, imshow(binaryMask);
+colorbar;
+axis image;
+axis on;
 
-% figure(4);
-% imshow(image1), colorbar, title('(b) Original Image 1');
-% 
-% figure(5);
-% imshow(myLinearContrastStretching(image1)), colorbar, title('(b) Contrast-Enhanced Image 1');
-% 
-% figure(6);
-% imshow(image2);
-% colorbar;
-% title('(b) Original Image 2');
-% 
-% figure(7);
-% imshow(myLinearContrastStretching(image2));
-% colorbar;
-% title('(b) Contrast-Enhanced Image 2');
-% 
-% figure(8);
-% imshow(image3);
-% colorbar;
-% title('(b) Original Image 3');
-% 
-% figure(9);
-% imshow(myLinearContrastStretching(image3));
-% colorbar;
-% title('(b) Contrast-Enhanced Image 3');
-% 
-% figure(10);
-% imshow(image5);
-% colorbar;
-% title('(b) Original Image 5');
-% 
-% figure(11);
-% imshow(myLinearContrastStretching(image5));
-% colorbar;
-% title('(b) Contrast-Enhanced Image 5');
-% 
-% figure(12);
-% imshow(image6);
-% colorbar;
-% title('(b) Original Image 6');
-% 
-% figure(13);
-% imshow(myLinearContrastStretching(image6));
-% colorbar;
-% title('(b) Contrast-Enhanced Image 6');
-% 
-% figure(14);
-% imshow(image7.*uint8(mask7));
-% colorbar;
-% title('(b) Original Masked Image 7');
-% 
-% figure(15);
-% imshow(myLinearContrastStretching(image7.*uint8(mask7)));
-% colorbar;
-% title('(b) Contrast-Enhanced Masked Image 7');
+% masked image
+binaryMask = cast(binaryMask, class(image7));
+maskedImage = image7 .* binaryMask;
+figure, imshow(maskedImage);
+colorbar;
+axis image;
+axis on;
+
+%% Part (b)
+
+figure, imshow(image1);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myLinearContrastStretching(image1));
+colorbar;
+axis image;
+axis on;
 
 
+figure, imshow(image2);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myLinearContrastStretching(image2));
+colorbar;
+axis image;
+axis on;
 
 
-%% (c) Histogram Equalization (HE)
+figure, imshow(image3);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myLinearContrastStretching(image3));
+colorbar;
+axis image;
+axis on;
 
 
-% figure(16), imshow(image1), colorbar, title('(c) Original Image 1');
-% 
-% figure(17), imshow(myHE(image1)), colorbar, title('(c) Contrast-Enhanced Image 1');
+figure, imshow(image5);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myLinearContrastStretching(image5));
+colorbar;
+axis image;
+axis on;
 
 
+figure, imshow(image6);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myLinearContrastStretching(image6));
+colorbar;
+axis image;
+axis on;
 
-%% (d) Histogram Matching (HM)
+%% Part (c)
 
+% Image 1
+imshow(image1);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myHE(image1));
+colorbar;
+axis image;
+axis on;
 
-% figure(18), imshow(image4 .* uint8(image4Mask)), colorbar, title('(d) Original Image 4');
-% 
-% figure(19), imshow(myHM(image4 .* uint8(image4Mask), image4Ref .* uint8(image4RefMask))), colorbar, title('(d) Contrast-Enhanced Image 4');
+% Image 2
+figure, imshow(image2);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myHE(image2));
+colorbar;
+axis image;
+axis on;
 
+%Image 3
+figure, imshow(image3);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myHE(image3));
+colorbar;
+axis image;
+axis on;
 
+% Image 5
+figure, imshow(image5);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myHE(image5));
+colorbar;
+axis image;
+axis on;
 
-%% (e) Contrast-Limited Adaptive Histogram Equalization (CLAHE)
+% Image 6
+figure, imshow(image6);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myHE(image6));
+colorbar;
+axis image;
+axis on;
 
+%% Part (d)
 
-figure(20), imshow(image3), colorbar, title('(e) Original Image 4');
+% masking the original images
+mask = cast(image4Mask, class(image4));
+ref_mask = cast(image4RefMask, class(image4Ref));
+maskedImage1 = image4 .* mask;
+maskedImage2 = image4Ref .* ref_mask;
 
-figure(21), imshow(myCLAHE(image3, 200, 0.01)), colorbar, title('(e) Contrast-Enhanced Image 4');
+figure, imshow(maskedImage1);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myHM(maskedImage1, maskedImage2));
+colorbar;
+axis image;
+axis on;
 
+%% Part (e)
 
+% Image 1
+figure, imshow(image1);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image1, 200, 0.01));
+colorbar;
+axis image;
+axis on;
 
+% Image 2
+figure, imshow(image2);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image2, 200, 0.01));
+colorbar;
+axis image;
+axis on;
 
-%% End
-toc;
+%Image 3
+figure, imshow(image3);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image3, 200, 0.01));
+colorbar;
+axis image;
+axis on;
+
+% Image 6
+figure, imshow(image6);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image6, 200, 0.01));
+colorbar;
+axis image;
+axis on;
