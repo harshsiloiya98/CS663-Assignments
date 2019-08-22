@@ -1,4 +1,5 @@
 %% MyMainScript
+tic;
 
 image1 = imread('../data/barbara.png');
 image2 = imread('../data/TEM.png');
@@ -197,3 +198,5 @@ figure, imshow(myCLAHE(image6, 200, 0.01));
 colorbar;
 axis image;
 axis on;
+
+toc;
