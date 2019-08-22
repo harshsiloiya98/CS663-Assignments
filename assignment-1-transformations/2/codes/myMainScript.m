@@ -17,12 +17,14 @@ image4RefMask = imread('../data/retinaRefMask.png');
 
 % original image
 imshow(image7);
+colorbar;
 axis image;
 axis on;
 
 % binary mask
 binaryMask = myForegroundMask(image7);
 figure, imshow(binaryMask);
+colorbar;
 axis image;
 axis on;
 
@@ -30,71 +32,112 @@ axis on;
 binaryMask = cast(binaryMask, class(image7));
 maskedImage = image7 .* binaryMask;
 figure, imshow(maskedImage);
+colorbar;
 axis image;
 axis on;
 
 %% Part (b)
 
-imshow(image1);
+figure, imshow(image1);
+colorbar;
 axis image;
 axis on;
-figure, myLinearContrastStretching(image1);
+figure, imshow(myLinearContrastStretching(image1));
+colorbar;
+axis image;
+axis on;
 
 
 figure, imshow(image2);
+colorbar;
 axis image;
 axis on;
-figure, myLinearContrastStretching(image2);
+figure, imshow(myLinearContrastStretching(image2));
+colorbar;
+axis image;
+axis on;
 
 
 figure, imshow(image3);
+colorbar;
 axis image;
 axis on;
-figure, myLinearContrastStretching(image3);
+figure, imshow(myLinearContrastStretching(image3));
+colorbar;
+axis image;
+axis on;
 
 
 figure, imshow(image5);
+colorbar;
 axis image;
 axis on;
-figure, myLinearContrastStretching(image5);
+figure, imshow(myLinearContrastStretching(image5));
+colorbar;
+axis image;
+axis on;
 
 
 figure, imshow(image6);
+colorbar;
 axis image;
 axis on;
-figure, myLinearContrastStretching(image6);
+figure, imshow(myLinearContrastStretching(image6));
+colorbar;
+axis image;
+axis on;
 
 %% Part (c)
 
 % Image 1
 imshow(image1);
+colorbar;
 axis image;
 axis on;
-figure, myHE(image1);
+figure, imshow(myHE(image1));
+colorbar;
+axis image;
+axis on;
 
 % Image 2
 figure, imshow(image2);
+colorbar;
 axis image;
 axis on;
-figure, myHE(image2);
+figure, imshow(myHE(image2));
+colorbar;
+axis image;
+axis on;
 
 %Image 3
 figure, imshow(image3);
+colorbar;
 axis image;
 axis on;
-figure, myHE(image3);
+figure, imshow(myHE(image3));
+colorbar;
+axis image;
+axis on;
 
 % Image 5
 figure, imshow(image5);
+colorbar;
 axis image;
 axis on;
-figure, myHE(image5);
+figure, imshow(myHE(image5));
+colorbar;
+axis image;
+axis on;
 
 % Image 6
 figure, imshow(image6);
+colorbar;
 axis image;
 axis on;
-figure, myHE(image6);
+figure, imshow(myHE(image6));
+colorbar;
+axis image;
+axis on;
 
 %% Part (d)
 
@@ -104,7 +147,53 @@ ref_mask = cast(image4RefMask, class(image4Ref));
 maskedImage1 = image4 .* mask;
 maskedImage2 = image4Ref .* ref_mask;
 
-imshow(maskedImage1);
+figure, imshow(maskedImage1);
+colorbar;
 axis image;
 axis on;
-figure, myHM(maskedImage1, maskedImage2);
+figure, imshow(myHM(maskedImage1, maskedImage2));
+colorbar;
+axis image;
+axis on;
+
+%% Part (e)
+
+% Image 1
+figure, imshow(image1);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image1, 200, 0.01));
+colorbar;
+axis image;
+axis on;
+
+% Image 2
+figure, imshow(image2);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image2, 200, 0.01));
+colorbar;
+axis image;
+axis on;
+
+%Image 3
+figure, imshow(image3);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image3, 200, 0.01));
+colorbar;
+axis image;
+axis on;
+
+% Image 6
+figure, imshow(image6);
+colorbar;
+axis image;
+axis on;
+figure, imshow(myCLAHE(image6, 200, 0.01));
+colorbar;
+axis image;
+axis on;

@@ -1,4 +1,4 @@
-function [] = myHE(img)
+function finalNewImg = myHE(img)
 % Performs histogram equalization of image
 
 [r, c, channels] = size(img);
@@ -30,8 +30,4 @@ end
 % converting matrix to image
 finalNewImg = cast(finalNewImg, class(img));
 
-% displaying the image with axes
-imshow(finalNewImg);
-axis image;
-axis on;
 end

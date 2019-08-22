@@ -1,4 +1,4 @@
-function [] = myHM(input_img, ref_img)
+function finalNewImg = myHM(input_img, ref_img)
 % performs histogram matching between two images
 
 [r1, c1, channels] = size(input_img);
@@ -40,8 +40,4 @@ end
 % converting matrix to image
 finalNewImg = cast(finalNewImg, class(input_img));
 
-% displaying the image with axes
-imshow(finalNewImg);
-axis image;
-axis on;
 end
