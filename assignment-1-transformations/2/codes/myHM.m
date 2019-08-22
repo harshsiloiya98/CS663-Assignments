@@ -1,5 +1,6 @@
 function finalNewImg = myHM(input_img, ref_img)
 % performs histogram matching between two images
+% Reference - https://stackoverflow.com/questions/26763974/histogram-matching-of-two-images-without-using-histeq
 
 [r1, c1, channels] = size(input_img);
 [r2, c2, ~] = size(ref_img);
