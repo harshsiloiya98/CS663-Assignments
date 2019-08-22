@@ -3,6 +3,7 @@ function [] = myLinearContrastStretching(img)
 
 [r, c, channels] = size(img);
 out = zeros(r, c, channels);
+img = im2double(img);
 
 % looping through the channels
 for i = 1:channels

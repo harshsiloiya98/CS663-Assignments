@@ -67,32 +67,44 @@ figure, myLinearContrastStretching(image6);
 %% Part (c)
 
 % Image 1
-
 imshow(image1);
 axis image;
 axis on;
 figure, myHE(image1);
 
-
+% Image 2
 figure, imshow(image2);
 axis image;
 axis on;
 figure, myHE(image2);
 
-
+%Image 3
 figure, imshow(image3);
 axis image;
 axis on;
 figure, myHE(image3);
 
-
+% Image 5
 figure, imshow(image5);
 axis image;
 axis on;
 figure, myHE(image5);
 
-
+% Image 6
 figure, imshow(image6);
 axis image;
 axis on;
 figure, myHE(image6);
+
+%% Part (d)
+
+% masking the original images
+mask = cast(image4Mask, class(image4));
+ref_mask = cast(image4RefMask, class(image4Ref));
+maskedImage1 = image4 .* mask;
+maskedImage2 = image4Ref .* ref_mask;
+
+imshow(maskedImage1);
+axis image;
+axis on;
+figure, myHM(maskedImage1, maskedImage2);
