@@ -242,26 +242,26 @@ axis image;
 axis on;
 
 %% CLAHE on Image 3
-% figure('Name', '(e) Original Image 3'), imshow(image3);
-% colorbar;
-% axis image;
-% axis on;
-% figure('Name', '(e) CLAHE(100, 0.01) on Image 3'), imshow(myCLAHE(image3, 100, 0.01));
-% colorbar;
-% axis image;
-% axis on;
+figure('Name', '(e) Original Image 3'), imshow(image3);
+colorbar;
+axis image;
+axis on;
+figure('Name', '(e) CLAHE(100, 0.01) on Image 3'), imshow(myCLAHE(image3, 100, 0.01));
+colorbar;
+axis image;
+axis on;
 figure('Name', '(e) CLAHE(10, 0.01) on Image 3'), imshow(myCLAHE(image3, 10, 0.01));
 colorbar;
 axis image;
 axis on;
-% figure('Name', '(e) CLAHE(1000, 0.01) on Image 3'), imshow(myCLAHE(image3, 1000, 0.01));
-% colorbar;
-% axis image;
-% axis on;
-% figure('Name', '(e) CLAHE(100, 0.005) on Image 3'), imshow(myCLAHE(image3, 100, 0.005));
-% colorbar;
-% axis image;
-% axis on;
+figure('Name', '(e) CLAHE(1000, 0.01) on Image 3'), imshow(myCLAHE(image3, 1000, 0.01));
+colorbar;
+axis image;
+axis on;
+figure('Name', '(e) CLAHE(100, 0.005) on Image 3'), imshow(myCLAHE(image3, 100, 0.005));
+colorbar;
+axis image;
+axis on;
 
 %% CLAHE on Image 6
 figure('Name', '(e) Original Image 6'), imshow(image6);
