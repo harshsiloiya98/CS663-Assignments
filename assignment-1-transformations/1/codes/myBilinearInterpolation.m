@@ -1,6 +1,8 @@
 function [] = myBilinearInterpolation(img)
 % Uses bilinear interpolation for image resizing
-% Reference - https://ia802707.us.archive.org/23/items/Lectures_on_Image_Processing/EECE_4353_15_Resampling.pdf
+% References 
+%    - https://ia802707.us.archive.org/23/items/Lectures_on_Image_Processing/EECE_4353_15_Resampling.pdf
+%    - https://stackoverflow.com/questions/26142288/resize-an-image-with-bilinear-interpolation-without-imresize
 
 [r, c] = size(img);
 
@@ -16,8 +18,8 @@ col_ratio = c / new_c;
 % created a matrix of row and column indexes to avoid two for loops
 [cf, rf] = meshgrid(1:new_c, 1:new_r);
 
-rf = rf * row_ratio;
-cf = cf * col_ratio;
+rf = floor(rf * row_ratio);
+cf = floor(cf * col_ratio);
 r0 = floor(rf);
 c0 = floor(cf);
 
@@ -44,10 +46,7 @@ temp = double(img);
 
 % multiplying the pixel intensities with the areas of the opposite
 % rectangles
-temp = temp(index1).*(1 - del_r).*(1 - del_c) + ...
-    temp(index2).*(del_r).*(1 - del_c) + ...
-    temp(index3).*(1 - del_r).*(del_c) + ...
-    temp(index4).*(del_r).*(del_c);
+temp = temp(index1).*(1 - del_r).*(1 - del_c) + temp(index2).*(del_r).*(1 - del_c) + temp(index3).*(1 - del_r).*(del_c) + temp(index4).*(del_r).*(del_c);
 
 % converting the double matrix back to image
 newImg = cast(temp, class(img));
