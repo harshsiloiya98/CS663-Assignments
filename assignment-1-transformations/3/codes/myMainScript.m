@@ -52,7 +52,7 @@ for i = 1:channels
     % Let p1 be the left part's PDF and p2 be the right part's PDF
     % (left part - left part of the divided histogram)
     p1 = pdf(1:medianIntensity);
-    p2 = pdf(medianIntensity:end);
+    p2 = pdf(medianIntensity + 1:end);
     p1_total = sum(p1);
     p1 = p1 / p1_total;
     p2 = p2 / (1 - p1_total);
