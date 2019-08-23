@@ -7,6 +7,7 @@ function [] = myShrinkImageByFactorD(img, d)
 newImg = img(d:d:r, d:d:c);
 
 imshow(newImg);
+colorbar;
 axis image;
 axis on;
 end

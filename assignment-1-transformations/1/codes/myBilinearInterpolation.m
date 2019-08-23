@@ -33,7 +33,7 @@ del_r = rf - r0;
 del_c = cf - c0;
 
 % getting the column-major indices of the pixels in the original image
-% 4 sets for 4 areas around the interpolated pixel
+% 4 sets for 4-neighbour areas around the interpolated pixel
 index1 = sub2ind([r, c], r0, c0);
 index2 = sub2ind([r, c], r0 + 1, c0);
 index3 = sub2ind([r, c], r0, c0 + 1);
@@ -42,6 +42,8 @@ index4 = sub2ind([r, c], r0 + 1, c0 + 1);
 % need to convert image to double for multiplication
 temp = double(img);
 
+% multiplying the pixel intensities with the areas of the opposite
+% rectangles
 temp = temp(index1).*(1 - del_r).*(1 - del_c) + ...
     temp(index2).*(del_r).*(1 - del_c) + ...
     temp(index3).*(1 - del_r).*(del_c) + ...
@@ -51,6 +53,7 @@ temp = temp(index1).*(1 - del_r).*(1 - del_c) + ...
 newImg = cast(temp, class(img));
 
 imshow(newImg);
+colorbar;
 axis image;
 axis on;
 end
