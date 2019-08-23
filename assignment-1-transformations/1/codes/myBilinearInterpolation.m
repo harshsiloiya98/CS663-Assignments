@@ -51,6 +51,7 @@ temp = temp(index1).*(1 - del_r).*(1 - del_c) + ...
 newImg = cast(temp, class(img));
 
 imshow(newImg);
+colorbar;
 axis image;
 axis on;
 end

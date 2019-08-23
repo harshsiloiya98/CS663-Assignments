@@ -44,6 +44,7 @@ cf(cf > c) = c;
 newImg = img(rf, cf);
 
 imshow(newImg);
+colorbar;
 axis image;
 axis on;
 end
