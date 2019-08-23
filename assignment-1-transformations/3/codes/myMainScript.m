@@ -81,15 +81,12 @@ end
 medianHE_img = cast(finalNewImg, class(img));
 
 figure('Name', 'Original'), imshow(img);
-colorbar;
 axis image;
 axis on;
 figure('Name', 'Normal HE'), imshow(normalHE_img);
-colorbar;
 axis image;
 axis on;
 figure('Name', 'Median HE'), imshow(medianHE_img);
-colorbar;
 axis image;
 axis on;
 figure('Name', 'Original Histogram'), plot(imhist(img));
