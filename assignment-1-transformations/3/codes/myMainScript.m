@@ -2,7 +2,7 @@
 % Reference - https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=754419
 tic;
 
-img = imread("../data/testImage.png");
+img = imread('../data/testImage.png');
 
 [r, c, channels] = size(img);
 num_pixels = r * c;
@@ -80,17 +80,19 @@ end
 % converting matrix to image
 medianHE_img = cast(finalNewImg, class(img));
 
-imshow(img);
+figure('Name', 'Original'), imshow(img);
 colorbar;
 axis image;
 axis on;
-figure, imshow(normalHE_img);
+figure('Name', 'Normal HE'), imshow(normalHE_img);
 colorbar;
 axis image;
 axis on;
-figure, imshow(medianHE_img);
+figure('Name', 'Median HE'), imshow(medianHE_img);
 colorbar;
 axis image;
 axis on;
-
+figure('Name', 'Original Histogram'), plot(imhist(img));
+figure('Name', 'Normal HE Histogram'), plot(imhist(normalHE_img));
+figure('Name', 'Median HE Histogram'), plot(imhist(medianHE_img));
 toc;
