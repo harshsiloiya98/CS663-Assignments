@@ -4,6 +4,6 @@ Done by
 - Harsh Siloiya 160050011 
 - Bhavesh Dhingra 160050108
 
-The reports for each question is put into [question_number]/reports directory in HTML format.
+The reports for each question is put into [question_number]/Report directory
 
-Image outputs for Q2 is put in 2/images directory.
+Image outputs for Q2 is put in 2/Report/images directory.
