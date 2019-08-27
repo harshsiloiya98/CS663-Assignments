@@ -7,7 +7,7 @@ function filteredImage = myPatchBasedFiltering(corruptImage, windowSize, patchSi
     halfPatchSize = floor(patchSize/2);
     
     for r=1:R
-        disp(r);
+        fprintf("r = %d\n",r);
         % Find top and bottom of window and patch around current pixel
         patchTop = max(1, r-halfPatchSize);
         patchBottom = min(R, r+halfPatchSize);
