@@ -15,32 +15,33 @@ distances_squared = x.^2 + y.^2;
 
 % using Gaussian function as spatial kernel
 spatial_kernel = (1 / sqrt(2 * pi * stddev_space^2)) * ... 
-    exp(-1 * distances_squared / (2 * stddev_space^2));
+    exp(-0.5 * distances_squared / stddev_space^2);
 
 for i = 1:r
     for j = 1:c
         currentPixel = inputImg(i, j);
+        weight = 0;
+        weighted_intensity = 0;
         
         % defining the window pixels' borders
-        p1 = max(i - windowSize, 1);
-        p2 = min(i + windowSize, r);
-        p3 = max(j - windowSize, 1);
-        p4 = min(j + windowSize, c);
-        window = inputImg(p1:p2, p3:p4);
+        p1 = max(-windowSize, 1 - i);
+        p2 = min(windowSize, r - i);
+        p3 = max(-windowSize, 1 - j);
+        p4 = min(windowSize, c - j);
         
-        % using Gaussian function as range kernel
-        range_kernel = (1 / sqrt(2 * pi * stddev_range^2)) * ... 
-            exp(-1 * (window - currentPixel).^2 / (2 * stddev_range^2));
+        for m = p1:p2
+            for n = p3:p4
+                intensity_diff = inputImg(i + m, j + n) - currentPixel;
+                range_kernel_value = (1 / sqrt(2 * pi * stddev_range^2)) * ...
+                    exp(-0.5 * intensity_diff^2 / stddev_range^2);
+                spatial_kernel_value = spatial_kernel(m + windowSize + 1, n + windowSize + 1);
+                weighted_intensity = weighted_intensity + ...
+                    range_kernel_value * spatial_kernel_value * inputImg(i + m, j + n);
+                weight = weight + range_kernel_value * spatial_kernel_value;
+            end
+        end
         
-        % taking values from the spatial kernel in the particular window
-        row_range = p1:p2;
-        col_range = p3:p4;
-        tmp_spatial_kernel = spatial_kernel((row_range - i + windowSize + 1), (col_range - j + windowSize + 1));
-        
-        % normalization term
-        Wp = range_kernel .* tmp_spatial_kernel;
-        
-        outputImg(i, j) = sum(Wp(:) .* currentPixel(:)) / sum(Wp(:));
+        outputImg(i, j) = weighted_intensity / weight;
     end
 end
 end
