@@ -109,4 +109,13 @@ fprintf("RMSD with 1.1sigma_intensity = %f\n\n", rmsd5_image3);
 
 %% Mask for spatial Gaussian
 
+windowSize = 9;
+[x, y] = meshgrid(-windowSize:windowSize, -windowSize:windowSize);
+distances_squared = x.^2 + y.^2;
+spatial_kernel = (1 / sqrt(2 * pi * optimal_sigma_space^2)) * ... 
+    exp(-0.5 * distances_squared / optimal_sigma_space^2);
+figure('Name', 'Mask');
+imshow(spatial_kernel);
+
+%%
 toc;
