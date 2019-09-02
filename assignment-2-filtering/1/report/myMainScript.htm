@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0076)https://matlab.mathworks.com/users/atharvn/Published/myMainScript/index.html -->
+<html class="gr__matlab_mathworks_com"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>myMainScript</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-02"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body data-gr-c-s-loaded="true"><div class="content"><h2>Contents</h2><div><ul><li><a href="https://matlab.mathworks.com/users/atharvn/Published/myMainScript/index.html#1">MyMainScript</a></li><li><a href="https://matlab.mathworks.com/users/atharvn/Published/myMainScript/index.html#2">PART (a)</a></li></ul></div><h2 id="1">MyMainScript</h2><pre class="codeinput">tic;
+
+<span class="comment">% This script generates result for Q1.</span>
+<span class="comment">% There is an interval of 10s between image generation for each subpart.</span>
+</pre><h2 id="2">PART (a)</h2><p>displays the original image</p><pre class="codeinput">image1 = imread(<span class="string">'bird.jpg'</span>);
+image2 = imread(<span class="string">'flower.jpg'</span>);
+figure(<span class="string">'Name'</span>, <span class="string">'(a) Original image 1'</span>), imshow(image1);
+<span class="comment">% figure('Name', '(a) Original image 2'), imshow(image2);</span>
+<span class="comment">% function [x,y,z]=abc(kjfn,sdf)</span>
+grayscale_image1 = rgb2gray(image1);
+grayscale_image2 = rgb2gray(image2);
+
+sobelX = [-1 0 1; -2 0 2; -1 0 1];
+sobelY = [ 1 2 1; 0 0 0;-1 -2 -1];
+
+<span class="comment">% figure('Name', 'RGB2Gray image'), imshow(I);</span>
+
+<span class="comment">% Applying Sobel Operator</span>
+<span class="comment">%image1</span>
+convX_image1 = conv2(grayscale_image1, sobelX, <span class="string">'same'</span>);
+convY_image1 = conv2(grayscale_image1, sobelY, <span class="string">'same'</span>);
+conv_image1 = sqrt(convX_image1.^2+convY_image1.^2);
+conv_image1 = (conv_image1*255)/ (max(conv_image1(:)));
+
+<span class="comment">%image2</span>
+convX_image2 = conv2(grayscale_image2, sobelX, <span class="string">'same'</span>);
+convY_image2 = conv2(grayscale_image2, sobelY, <span class="string">'same'</span>);
+conv_image2 = sqrt(convX_image2.^2+convY_image2.^2);
+conv_image2 = (conv_image2*255)/ (max(conv_image2(:)));
+
+<span class="comment">% max(ans(:))</span>
+<span class="comment">% figure('Name', ' Convolved image'); imshow(uint8(conv_image1));</span>
+<span class="comment">% figure('Name', ' Convolved image'); imshow(uint8(conv_image2));</span>
+
+imfill_image1 = imfill(conv_image1, <span class="string">'holes'</span>);
+imfill_image2 = imfill(conv_image2, <span class="string">'holes'</span>);
+<span class="comment">% figure('Name', ' imfill image'); imshow(uint8(imfill_image1));</span>
+
+<span class="comment">%for IMAGE1</span>
+c=imfill_image1&gt;49;
+mask_image1=c*255;
+mask_image1(1:30,850:910) = 0;
+mask_image1(120:150,1075:1100) = 0;
+mask_image1(315:350,260:345) = 0;
+mask_image1(400:420,160:220) = 0;
+mask_image1(585:615,740:755) = 255;
+<span class="comment">% blackening the borders</span>
+mask_image1(:,1000:end)=0;
+mask_image1(:,1:10)=0;
+mask_image1(720:end,:)=0;
+mask_image1(1:10,:)=0;
+<span class="comment">%answer for part 1 (a)</span>
+<span class="comment">% figure('Name', ' Mask Image'); imshow(uint8(mask_image1));</span>
+mask_image11 = mask_image1/255;
+foreground_image1 = image1;
+foreground_image1(:,:,1) = uint8(mask_image11).*image1(:,:,1);
+foreground_image1(:,:,2) = uint8(mask_image11).*image1(:,:,2);
+foreground_image1(:,:,3) = uint8(mask_image11).*image1(:,:,3);
+figure(<span class="string">'Name'</span>, <span class="string">' Foreground Image 1'</span>); imshow(foreground_image1);
+background_image1 = image1-foreground_image1;
+figure(<span class="string">'Name'</span>, <span class="string">' Background Image 1'</span>); imshow(background_image1);
+
+<span class="comment">%for IMAGE2</span>
+c1=imfill_image2&gt;29;
+mask_image2=c1*255;
+figure(<span class="string">'Name'</span>, <span class="string">' Mask Image'</span>); imshow(uint8(mask_image1));
+
+<span class="comment">% mask_image2 = mask_image2/255;</span>
+<span class="comment">% foreground_image2 = image1;</span>
+<span class="comment">% foreground_image2(:,:,1) = uint8(mask_image2).*image2(:,:,1);</span>
+<span class="comment">% foreground_image2(:,:,2) = uint8(mask_image2).*image2(:,:,2);</span>
+<span class="comment">% foreground_image2(:,:,3) = uint8(mask_image2).*image2(:,:,3);</span>
+<span class="comment">% figure('Name', ' Foreground Image'); imshow(foreground_image2);</span>
+<span class="comment">% background_image2 = image2-foreground_image2;</span>
+<span class="comment">% figure('Name', ' Background Image'); imshow(background_image2);</span>
+
+d_threshold_image1 = 40;
+d_threshold_image2 = 20;
+
+
+[ANS_image1] = mySpatiallyVaryingKernel(image1,mask_image1,d_threshold_image1);
+ANS_image2 = mySpatiallyVaryingKernel(image2,mask_image2,d_threshold_image2);
+figure(<span class="string">'Name'</span>, <span class="string">' Final Answer image 1'</span>); imshow(uint8(ANS_image1));
+colorbar;
+axis <span class="string">image</span>;
+axis <span class="string">on</span>;
+<span class="comment">% pause(10);</span>
+</pre><img vspace="5" hspace="5" src="./myMainScript_files/myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="./myMainScript_files/myMainScript_02.png" alt=""> <img vspace="5" hspace="5" src="./myMainScript_files/myMainScript_03.png" alt=""> <img vspace="5" hspace="5" src="./myMainScript_files/myMainScript_04.png" alt=""> <img vspace="5" hspace="5" src="./myMainScript_files/myMainScript_05.png" alt=""> <img vspace="5" hspace="5" src="./myMainScript_files/myMainScript_06.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB® R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% MyMainScript
+tic;
+
+% This script generates result for Q1.
+% There is an interval of 10s between image generation for each subpart.
+
+%% PART (a)
+% displays the original image
+image1 = imread('bird.jpg');
+image2 = imread('flower.jpg');
+figure('Name', '(a) Original image 1'), imshow(image1);
+% figure('Name', '(a) Original image 2'), imshow(image2);
+% function [x,y,z]=abc(kjfn,sdf)
+grayscale_image1 = rgb2gray(image1);
+grayscale_image2 = rgb2gray(image2); 
+
+sobelX = [-1 0 1; -2 0 2; -1 0 1];
+sobelY = [ 1 2 1; 0 0 0;-1 -2 -1];
+
+% figure('Name', 'RGB2Gray image'), imshow(I);
+
+% Applying Sobel Operator
+%image1
+convX_image1 = conv2(grayscale_image1, sobelX, 'same');
+convY_image1 = conv2(grayscale_image1, sobelY, 'same');
+conv_image1 = sqrt(convX_image1.^2+convY_image1.^2);
+conv_image1 = (conv_image1*255)/ (max(conv_image1(:)));
+
+%image2
+convX_image2 = conv2(grayscale_image2, sobelX, 'same');
+convY_image2 = conv2(grayscale_image2, sobelY, 'same');
+conv_image2 = sqrt(convX_image2.^2+convY_image2.^2);
+conv_image2 = (conv_image2*255)/ (max(conv_image2(:)));
+
+% max(ans(:))
+% figure('Name', ' Convolved image'); imshow(uint8(conv_image1));
+% figure('Name', ' Convolved image'); imshow(uint8(conv_image2));
+
+imfill_image1 = imfill(conv_image1, 'holes');
+imfill_image2 = imfill(conv_image2, 'holes');
+% figure('Name', ' imfill image'); imshow(uint8(imfill_image1));
+
+%for IMAGE1
+c=imfill_image1>49;
+mask_image1=c*255;
+mask_image1(1:30,850:910) = 0;
+mask_image1(120:150,1075:1100) = 0;
+mask_image1(315:350,260:345) = 0;
+mask_image1(400:420,160:220) = 0;
+mask_image1(585:615,740:755) = 255;
+% blackening the borders
+mask_image1(:,1000:end)=0;
+mask_image1(:,1:10)=0;
+mask_image1(720:end,:)=0;
+mask_image1(1:10,:)=0;
+%answer for part 1 (a)
+% figure('Name', ' Mask Image'); imshow(uint8(mask_image1));
+mask_image11 = mask_image1/255;
+foreground_image1 = image1;
+foreground_image1(:,:,1) = uint8(mask_image11).*image1(:,:,1);
+foreground_image1(:,:,2) = uint8(mask_image11).*image1(:,:,2);
+foreground_image1(:,:,3) = uint8(mask_image11).*image1(:,:,3);
+figure('Name', ' Foreground Image 1'); imshow(foreground_image1); 
+background_image1 = image1-foreground_image1;
+figure('Name', ' Background Image 1'); imshow(background_image1); 
+
+%for IMAGE2
+c1=imfill_image2>29;
+mask_image2=c1*255;
+figure('Name', ' Mask Image'); imshow(uint8(mask_image1));
+
+% mask_image2 = mask_image2/255;
+% foreground_image2 = image1;
+% foreground_image2(:,:,1) = uint8(mask_image2).*image2(:,:,1);
+% foreground_image2(:,:,2) = uint8(mask_image2).*image2(:,:,2);
+% foreground_image2(:,:,3) = uint8(mask_image2).*image2(:,:,3);
+% figure('Name', ' Foreground Image'); imshow(foreground_image2); 
+% background_image2 = image2-foreground_image2;
+% figure('Name', ' Background Image'); imshow(background_image2);
+
+d_threshold_image1 = 40;
+d_threshold_image2 = 20;
+
+
+[ANS_image1] = mySpatiallyVaryingKernel(image1,mask_image1,d_threshold_image1);
+ANS_image2 = mySpatiallyVaryingKernel(image2,mask_image2,d_threshold_image2);
+figure('Name', ' Final Answer image 1'); imshow(uint8(ANS_image1));
+colorbar;
+axis image;
+axis on;
+% pause(10);
+##### SOURCE END #####
+--></body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>

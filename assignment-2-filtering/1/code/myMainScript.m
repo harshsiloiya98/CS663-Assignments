@@ -69,11 +69,11 @@ c1=imfill_image2>29;
 mask_image2=c1*255;
 figure('Name', ' Mask Image'); imshow(uint8(mask_image1));
 
-% mask_image2 = mask_image2/255;
+% mask_image22 = mask_image2/255;
 % foreground_image2 = image1;
-% foreground_image2(:,:,1) = uint8(mask_image2).*image2(:,:,1);
-% foreground_image2(:,:,2) = uint8(mask_image2).*image2(:,:,2);
-% foreground_image2(:,:,3) = uint8(mask_image2).*image2(:,:,3);
+% foreground_image2(:,:,1) = uint8(mask_image22).*image2(:,:,1);
+% foreground_image2(:,:,2) = uint8(mask_image22).*image2(:,:,2);
+% foreground_image2(:,:,3) = uint8(mask_image22).*image2(:,:,3);
 % figure('Name', ' Foreground Image'); imshow(foreground_image2); 
 % background_image2 = image2-foreground_image2;
 % figure('Name', ' Background Image'); imshow(background_image2);
