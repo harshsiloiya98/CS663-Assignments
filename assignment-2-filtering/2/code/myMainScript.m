@@ -7,11 +7,11 @@ tic;
 % 2. Maximize the figure windows to display images clearly
 % 3. If the images do not get displayed, it might be due to licensing issues for the image processing toolbox
 
-image1 = load("..\data\barbara.mat");
+image1 = load("../data/barbara.mat");
 image1 = mat2gray(image1.imageOrig);
-image2 = imread("..\data\grass.png");
+image2 = imread("../data/grass.png");
 image2 = mat2gray(image2);
-image3 = imread("..\data\honeyCombReal.png");
+image3 = imread("../data/honeyCombReal.png");
 image3 = mat2gray(image3);
 
 %% corrupting images using Gaussian noise
