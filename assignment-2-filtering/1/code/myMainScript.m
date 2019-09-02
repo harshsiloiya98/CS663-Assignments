@@ -6,8 +6,8 @@ tic;
 
 %% PART (a)
 % displays the original image
-image1 = imread('bird.jpg');
-image2 = imread('flower.jpg');
+image1 = imread('../data/bird.jpg');
+image2 = imread('../data/flower.jpg');
 figure('Name', '(a) Original image 1'), imshow(image1);
 % figure('Name', '(a) Original image 2'), imshow(image2);
 % function [x,y,z]=abc(kjfn,sdf)
