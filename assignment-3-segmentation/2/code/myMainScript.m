@@ -18,7 +18,7 @@ h_spatial = 32;
 h_color = 16;
 
 % number of iterations
-num_iterations = 10;
+num_iterations = 25;
 
 %% Image segmentation using Mean Shift Algorithm
 
