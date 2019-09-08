@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>myMainScript</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-05"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
+      --><title>myMainScript</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-08"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -75,7 +75,7 @@ image = load(<span class="string">'../data/boat.mat'</span>);
 image = mat2gray(image.imageOrig);
 
 
-[Dx, Dy, eigen1, eigen2, cornerness] = myHarrisCornerDetector(image, 0.5, 25, 0.5, 0.15);
+[Dx, Dy, eigen1, eigen2, cornerness] = myHarrisCornerDetector(image, 0.9, 25, 0.9, 0.15);
 
 figure(<span class="string">'Name'</span>, <span class="string">'Derivative along X'</span>), imshow(Dx), title(<span class="string">'Derivative along X'</span>), colorbar;
 pause(1);
@@ -86,8 +86,8 @@ pause(1);
 figure(<span class="string">'Name'</span>, <span class="string">'Eigenvalue 2'</span>), imshow(eigen2), title(<span class="string">'Eigenvalue 2'</span>), colorbar;
 pause(1);
 figure(<span class="string">'Name'</span>, <span class="string">'Harris corner-ness measure'</span>), imshow(mat2gray(cornerness)), title(<span class="string">'Harris corner-ness measure'</span>), colorbar;
-</pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_02.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_03.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_04.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_05.png" alt=""> <h2 id="3">Parameters</h2><div><ul><li>Gaussian Smoothing Factor for Image = 0.5</li><li>Gaussian Patch Size = 25</li><li>Gaussian Patch STD = 0.5</li><li>k-value = 0.15</li></ul></div><pre class="codeinput">toc;
-</pre><pre class="codeoutput">Elapsed time is 8.431358 seconds.
+</pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_02.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_03.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_04.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_05.png" alt=""> <h2 id="3">Parameters</h2><div><ul><li>Gaussian Smoothing Factor for Image = 0.9</li><li>Gaussian Patch Size = 25</li><li>Gaussian Patch STD = 0.9</li><li>k-value = 0.15</li></ul></div><pre class="codeinput">toc;
+</pre><pre class="codeoutput">Elapsed time is 18.333655 seconds.
 </pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% MyMainScript
@@ -102,7 +102,7 @@ image = load('../data/boat.mat');
 image = mat2gray(image.imageOrig);
 
 
-[Dx, Dy, eigen1, eigen2, cornerness] = myHarrisCornerDetector(image, 0.5, 25, 0.5, 0.15);
+[Dx, Dy, eigen1, eigen2, cornerness] = myHarrisCornerDetector(image, 0.9, 25, 0.9, 0.15);
 
 figure('Name', 'Derivative along X'), imshow(Dx), title('Derivative along X'), colorbar;
 pause(1);
@@ -116,9 +116,9 @@ figure('Name', 'Harris corner-ness measure'), imshow(mat2gray(cornerness)), titl
 
 %% Parameters
 % 
-% * Gaussian Smoothing Factor for Image = 0.5
+% * Gaussian Smoothing Factor for Image = 0.9
 % * Gaussian Patch Size = 25
-% * Gaussian Patch STD = 0.5
+% * Gaussian Patch STD = 0.9
 % * k-value = 0.15
 % 
 

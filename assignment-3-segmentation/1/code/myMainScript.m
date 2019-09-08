@@ -10,7 +10,7 @@ image = load('../data/boat.mat');
 image = mat2gray(image.imageOrig);
 
 
-[Dx, Dy, eigen1, eigen2, cornerness] = myHarrisCornerDetector(image, 0.5, 25, 0.5, 0.15);
+[Dx, Dy, eigen1, eigen2, cornerness] = myHarrisCornerDetector(image, 0.9, 25, 0.9, 0.15);
 
 figure('Name', 'Derivative along X'), imshow(Dx), title('Derivative along X'), colorbar;
 pause(1);
@@ -24,9 +24,9 @@ figure('Name', 'Harris corner-ness measure'), imshow(mat2gray(cornerness)), titl
 
 %% Parameters
 % 
-% * Gaussian Smoothing Factor for Image = 0.5
+% * Gaussian Smoothing Factor for Image = 0.9
 % * Gaussian Patch Size = 25
-% * Gaussian Patch STD = 0.5
+% * Gaussian Patch STD = 0.9
 % * k-value = 0.15
 % 
 
