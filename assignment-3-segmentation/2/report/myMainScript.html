@@ -80,10 +80,10 @@ h_color = 16;
 
 <span class="comment">% number of iterations</span>
 num_iterations = 25;
-</pre><h2 id="3">Image segmentation using Mean Shift Algorithm</h2><pre class="codeinput">out = myMeanShiftSegmentation(image, h_spatial, h_color, num_iterations);
+</pre><h2 id="3">Image segmentation using Mean Shift Algorithm</h2><pre class="codeinput">out = myMeanShiftSegmentation(image, h_spatial, h_color, num_iterations); out = uint8(out);
 </pre><h2 id="4">Displaying the images</h2><pre class="codeinput">figure(<span class="string">'Name'</span>, <span class="string">'Mean Shift Segmentation on flower.png'</span>);
 subplot(1, 2, 1), imshow(image), colorbar, title(<span class="string">'Original Image'</span>);
-subplot(1, 2, 2), imshow(uint8(out)), colorbar, title(<span class="string">'Segmented Image'</span>);
+subplot(1, 2, 2), imshow(out), colorbar, title(<span class="string">'Segmented Image'</span>);
 </pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <pre class="codeinput">toc;
 </pre><pre class="codeoutput">Elapsed time is 11100.323448 seconds.
 </pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
