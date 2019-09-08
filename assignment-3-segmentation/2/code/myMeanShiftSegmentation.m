@@ -26,25 +26,38 @@ for i = 1:r
             squared_spatial_distances = sum(bsxfun(@minus, new_pixel(1:2, :), X(1:2, :)).^2);
             squared_color_distances = sum(bsxfun(@minus, new_pixel(3:5, :), X(3:5, :)).^2);
             
-            nearest_pixels = knnsearch(X', new_pixel', 'K', 20, 'Distance', 'euclidean');
-            
             % spatial gaussian kernel
-            k1 = exp(-1 * squared_spatial_distances(nearest_pixels).^2 / (2 * h_spatial^2));
+            k1 = exp(-1 * squared_spatial_distances.^2 / (2 * h_spatial^2));
             
             % color gaussian kernel
-            k2 = exp(-1 * squared_color_distances(nearest_pixels).^2 / (2 * h_color^2));
+            k2 = exp(-1 * squared_color_distances.^2 / (2 * h_color^2));
             
             % gradient of multivariate kernel
-            k1 = k1 .* (sqrt(squared_spatial_distances(nearest_pixels)) / h_spatial^2);
-            k2 = k2 .* (sqrt(squared_color_distances(nearest_pixels)) / h_color^2);
+            k1 = k1 .* (sqrt(squared_spatial_distances) / h_spatial^2);
+            k2 = k2 .* (sqrt(squared_color_distances) / h_color^2);
+            
+            % combining and normalizing the kernel
             K = k1 + k2;
             normalized_K = K / sum(K);
             
-            new_pixel = sum(bsxfun(@times, X(:, nearest_pixels), normalized_K), 2);
+            new_pixel = sum(bsxfun(@times, X, normalized_K), 2);
+            
+            % uncomment below lines and comment the previous counterparts to use kNN feature
+            % NOTE: running knn meanshift takes a lot more time than normal meanshift
+            % nearest_pixels = knnsearch(X', new_pixel', 'K', 10, 'Distance', 'euclidean');
+            % k1 = exp(-1 * squared_spatial_distances(nearest_pixels).^2 / (2 * h_spatial^2));
+            % k2 = exp(-1 * squared_color_distances(nearest_pixels).^2 / (2 * h_color^2));
+            % k1 = k1 .* (sqrt(squared_spatial_distances(nearest_pixels)) / h_spatial^2);
+            % k2 = k2 .* (sqrt(squared_color_distances(nearest_pixels)) / h_color^2);
+            % K = k1 + k2;
+            % normalized_K = K / sum(K);
+            % new_pixel = sum(bsxfun(@times, X(:, nearest_pixels), normalized_K), 2);
+            
         end
         for ch = 1:channels
             outputImg(i, j, ch) = new_pixel(ch, 1);
         end
+        % fprintf("Pixel %d done\n", j + c * (i - 1));
     end
 end
 end
