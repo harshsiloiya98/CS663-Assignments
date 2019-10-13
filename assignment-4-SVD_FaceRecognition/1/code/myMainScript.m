@@ -40,42 +40,65 @@ end
 
 
 K = [1 2 3 5 10 15 20 30 50 75 100 150 170];
-recognitionRates = zeros(size(K));
 
-% calculating the recognition rate for each k
-for i = 1:size(K, 2)
-    % change the third argument of getEigenvectors() to 'svd' or 'eig'
-    % according to how you want to calculate the eigenvectors
-    eV = getEigenvectors(trainingSet, K(i), 'svd');
-    trainProjection = eV' * trainingSet;
-    testProjection = eV' * testingSet;
-    truePositives = 0;
-    for j = 1:size(testProjection, 2)
-        minSqDiff = Inf;
-        matchedIdx = 0;
-        for k = 1:size(trainProjection, 2)
-            sqDiff = norm(testProjection(:, j) - trainProjection(:, k))^2;
-            if (sqDiff < minSqDiff)
-                minSqDiff = sqDiff;
-                matchedIdx = k;
-            end
-        end
-        if (ceil(matchedIdx / 6) == ceil(j / 4))
-            truePositives = truePositives + 1;
-        end
-    end
-    recognitionRates(i) = truePositives / M;
-end
+% change the last argument of myFaceRecog to 'svd' or 'eig' according to
+% how you want to calculate the eigenvectors
+recognitionRates = myFaceRecog(trainingSet, 6, testingSet, 4, K, 'svd');
 
 figure;
 plot(K, recognitionRates);
 xlabel('K');
 ylabel('Recognition rate');
-title('Recognition rate vs K');
+title('Recognition rate vs K (ORL)');
 
 %% Yale dataset testing
 
-numPeople = 
+% reading the images
+folderPath = "../../CroppedYale";
+subfolders = dir(folderPath);
+dirFlags = [subfolders.isdir];
+subfolders = subfolders(dirFlags);
+trainingSet = [];
+testingSet = [];
+for i = 3:length(subfolders)
+    subfolderPath = strcat(folderPath, "/", subfolders(i).name);
+    files = dir(fullfile(subfolderPath, '*.pgm'));
+    for j = 1:length(files)
+        filePath = strcat(subfolderPath, "/", files(j).name);
+        tempImg = imread(filePath);
+        if (j < 41)
+            trainingSet = cat(3, trainingSet, im2double(tempImg));
+        else
+            testingSet = cat(3, testingSet, im2double(tempImg));
+        end
+    end
+end
+
+% data preprocessing
+[r, c, N] = size(trainingSet);
+[~, ~, M] = size(testingSet);
+trainingSet = reshape(trainingSet, [r * c, N]);
+testingSet = reshape(testingSet, [r * c, M]);
+
+meanImg = mean(trainingSet, 2);
+for i = 1:N
+    trainingSet(:, i) = trainingSet(:, i) - meanImg;
+end
+for j = 1:M
+    testingSet(:, j) = testingSet(:, j) - meanImg;
+end
+
+K = [1 2 3 5 10 15 20 30 50 60 65 75 100 200 300 500 1000];
+
+% change the last argument of myFaceRecog to 'svd' or 'eig' according to
+% how you want to calculate the eigenvectors
+recognitionRates = myFaceRecog(trainingSet, 40, testingSet, 24, K, 'svd');
+
+figure;
+plot(K, recognitionRates);
+xlabel('K');
+ylabel('Recognition rate');
+title('Recognition rate vs K (Yale)');
 
 %%
 toc;
