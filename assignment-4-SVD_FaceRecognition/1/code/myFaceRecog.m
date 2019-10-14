@@ -1,4 +1,4 @@
-function [recognitionRates] = myFaceRecog(trainingSet, numTrain, testingSet, numTest, K, method)
+function [recognitionRates] = myFaceRecog(trainingSet, trainIdentityMap, testingSet, testIdentityMap, K, method)
 % face recognition algorithm implementation
 
 recognitionRates = zeros(size(K));
@@ -22,7 +22,10 @@ for i = 1:size(K, 2)
         end
         % numTrain - no. of images of a particular person considered for training
         % numTest - no. of images of a particular person considered for testing
-        if (ceil(matchedIdx / numTrain) == ceil(j / numTest))
+        %if (ceil(matchedIdx / trainIden) == ceil(j / numTest))
+        %    truePositives = truePositives + 1;
+        %end
+        if (trainIdentityMap(matchedIdx) == testIdentityMap(j))
             truePositives = truePositives + 1;
         end
     end
