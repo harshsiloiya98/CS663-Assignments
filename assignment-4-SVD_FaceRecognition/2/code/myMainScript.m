@@ -46,7 +46,7 @@ for i = 1:size(K,2)
     imshow(outputImg); title( strcat('Reconstructed Image at K = ', int2str(k)) );
 end
 
-%% Plotting 25 Eigenvectors
+%% Plotting 25 Eigenfaces
 
 k=25;
 [U, ~, ~] = svd(trainingSet, 'econ');
