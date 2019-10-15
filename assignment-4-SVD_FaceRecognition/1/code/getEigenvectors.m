@@ -1,5 +1,5 @@
 function [eigenvectors] = getEigenvectors(X, k, method)
-% calculates the eigenvectors for the training set images using
+% calculates the eigenvectors for the training set images using either
 % singular-value decomposition or finding eigenvectors of X'X
 
 if (strcmp(method, 'eig') == 1)

@@ -1,11 +1,10 @@
 %% MyMainScript
-clc;
-clear;
+
 tic;
 
 %% NOTE: The dataset folders should be placed according to the folder paths set in the code
 
-%% Data Preprocessing
+%% Data reading and preprocessing
 
 numPeople = 32;
 folderPath = "../../att_faces";
@@ -48,7 +47,7 @@ K = [1 2 3 5 10 15 20 30 50 75 100 150 170];
 
 % change the last argument of myFaceRecog to 'svd' or 'eig' according to
 % how you want to calculate the eigenvectors
-recognitionRates = myFaceRecog(trainingSet, trainIdentityMap, testingSet, testIdentityMap, K, 'svd');
+[recognitionRates, ~] = myFaceRecog(trainingSet, trainIdentityMap, testingSet, testIdentityMap, K, 'svd');
 
 figure;
 plot(K, recognitionRates);
@@ -104,13 +103,19 @@ K = [1 2 3 5 10 15 20 30 50 60 65 75 100 200 300 500 1000];
 
 % change the last argument of myFaceRecog to 'svd' or 'eig' according to
 % how you want to calculate the eigenvectors
-recognitionRates = myFaceRecog(trainingSet, trainIdentityMap, testingSet, testIdentityMap, K, 'svd');
+[recognitionRates1, recognitionRates2] = myFaceRecog(trainingSet, trainIdentityMap, testingSet, testIdentityMap, K, 'svd');
 
 figure;
-plot(K, recognitionRates);
+plot(K, recognitionRates1);
 xlabel('K');
 ylabel('Recognition rate');
 title('Recognition rate vs K (Yale)');
+
+figure;
+plot(K, recognitionRates2);
+xlabel('K');
+ylabel('Recognition rate');
+title('Recognition rate vs K excluding the 3 largest eigenvectors (Yale)');
 
 %%
 toc;
