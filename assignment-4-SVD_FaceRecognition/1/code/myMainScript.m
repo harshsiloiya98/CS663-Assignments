@@ -7,16 +7,16 @@ tic;
 %% Data reading and preprocessing
 
 numPeople = 32;
-folderPath = "../../att_faces";
+folderPath = '../../att_faces';
 trainingSet = [];
 trainIdentityMap = [];
 testingSet = [];
 testIdentityMap = [];
 
 for i = 1:numPeople
-    subfolderPath = strcat(folderPath, "/s", int2str(i));
+    subfolderPath = strcat(folderPath, '/s', int2str(i));
     for j = 1:10
-        filePath = strcat(subfolderPath, "/", int2str(j), ".pgm");
+        filePath = strcat(subfolderPath, '/', int2str(j), '.pgm');
         tempImg = imread(filePath);
         if (j < 7)
             trainingSet = cat(3, trainingSet, im2double(tempImg));
@@ -57,7 +57,7 @@ title('Recognition rate vs K (ORL)');
 
 %% Yale dataset testing
 
-folderPath = "../../CroppedYale";
+folderPath = '../../CroppedYale';
 subfolders = dir(folderPath);
 dirFlags = [subfolders.isdir];
 subfolders = subfolders(dirFlags);
@@ -70,10 +70,10 @@ testIdentityMap = [];
 
 % reading the images
 for i = 1:length(subfolders)
-    subfolderPath = strcat(folderPath, "/", subfolders(i).name);
+    subfolderPath = strcat(folderPath, '/', subfolders(i).name);
     files = dir(fullfile(subfolderPath, '*.pgm'));
     for j = 1:length(files)
-        filePath = strcat(subfolderPath, "/", files(j).name);
+        filePath = strcat(subfolderPath, '/', files(j).name);
         tempImg = imread(filePath);
         if (j < 41)
             trainingSet = cat(3, trainingSet, im2double(tempImg));
