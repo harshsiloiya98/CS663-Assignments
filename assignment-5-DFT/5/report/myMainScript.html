@@ -1,0 +1,309 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>myMainScript</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-03"><meta name="DC.source" content="myMainScript.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">MyMainScript</a></li><li><a href="#2">Reading the images</a></li><li><a href="#3">Adding noise to the images</a></li><li><a href="#4">Image denoising using PCA (complete image)</a></li><li><a href="#5">Image denoising using PCA (nearest K = 200 patches)</a></li><li><a href="#6">Image denoising using Bilateral Filtering</a></li><li><a href="#7">Image denoising using Poisson distribution</a></li><li><a href="#8">EXPLANATIONS</a></li></ul></div><h2 id="1">MyMainScript</h2><pre class="codeinput">tic;
+</pre><h2 id="2">Reading the images</h2><pre class="codeinput">img1 = imread(<span class="string">'../../barbara256.png'</span>);
+img1 = double(img1);
+img2 = imread(<span class="string">'../../stream.png'</span>);
+img2 = double(img2);
+</pre><h2 id="3">Adding noise to the images</h2><pre class="codeinput">noisyImg1 = img1 + randn(size(img1)) * 20;
+noisyImg2 = img2 + randn(size(img2)) * 20;
+</pre><h2 id="4">Image denoising using PCA (complete image)</h2><pre class="codeinput">denoisedImg1 = myPCADenoising1(noisyImg1, 20);
+displayImage(img1, <span class="string">'Original image'</span>);
+displayImage(noisyImg1, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg1, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg1(:) - img1(:)) / norm(img1(:));
+fprintf(<span class="string">"RMSE for barbara256.png = %f\n"</span>, rmse);
+
+denoisedImg1 = myPCADenoising1(noisyImg2, 20);
+displayImage(img2, <span class="string">'Original image'</span>);
+displayImage(noisyImg2, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg1, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg1(:) - img2(:)) / norm(img2(:));
+fprintf(<span class="string">"RMSE for stream.png = %f\n"</span>, rmse);
+</pre><pre class="codeoutput">RMSE for barbara256.png = 0.071640
+RMSE for stream.png = 0.095245
+</pre><img vspace="5" hspace="5" src="myMainScript_01.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_02.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_03.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_04.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_05.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_06.png" alt=""> <h2 id="5">Image denoising using PCA (nearest K = 200 patches)</h2><pre class="codeinput">denoisedImg2 = myPCADenoising2(noisyImg1, 20);
+displayImage(img1, <span class="string">'Original image'</span>);
+displayImage(noisyImg1, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg2, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg2(:) - img1(:)) / norm(img1(:));
+fprintf(<span class="string">"RMSE for barbara256.png = %f\n"</span>, rmse);
+
+denoisedImg2 = myPCADenoising2(noisyImg2, 20);
+displayImage(img2, <span class="string">'Original image'</span>);
+displayImage(noisyImg2, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg2, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg2(:) - img2(:)) / norm(img2(:));
+fprintf(<span class="string">"RMSE for stream.png = %f\n"</span>, rmse);
+</pre><pre class="codeoutput">RMSE for barbara256.png = 0.057208
+RMSE for stream.png = 0.089741
+</pre><img vspace="5" hspace="5" src="myMainScript_07.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_08.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_09.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_10.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_11.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_12.png" alt=""> <h2 id="6">Image denoising using Bilateral Filtering</h2><pre class="codeinput">denoisedImg3 = myBilateralFiltering(noisyImg1, 20, 10);
+displayImage(img1, <span class="string">'Original image'</span>);
+displayImage(noisyImg1, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg3, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg3(:) - img1(:)) / norm(img1(:));
+fprintf(<span class="string">"RMSE for barbara256.png = %f\n"</span>, rmse);
+
+denoisedImg3 = myBilateralFiltering(noisyImg2, 20, 10);
+displayImage(img2, <span class="string">'Original image'</span>);
+displayImage(noisyImg2, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg3, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg3(:) - img2(:)) / norm(img2(:));
+fprintf(<span class="string">"RMSE for stream.png = %f\n"</span>, rmse);
+</pre><pre class="codeoutput">RMSE for barbara256.png = 0.131553
+RMSE for stream.png = 0.143425
+</pre><img vspace="5" hspace="5" src="myMainScript_13.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_14.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_15.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_16.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_17.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_18.png" alt=""> <h2 id="7">Image denoising using Poisson distribution</h2><pre class="codeinput">noisyImg1 = poissrnd(img1);
+denoisedImg4 = myPCADenoising2(sqrt(noisyImg1 + 3 / 8), 0.25);
+denoisedImg4 = denoisedImg4.^2 - 3 / 8;
+displayImage(img1, <span class="string">'Original image'</span>);
+displayImage(noisyImg1, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg4, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg4(:) - img1(:)) / norm(img1(:));
+fprintf(<span class="string">"RMSE for barbara256.png = %f\n"</span>, rmse);
+
+noisyImg2 = poissrnd(img2);
+denoisedImg4 = myPCADenoising2(sqrt(noisyImg2 + 3 / 8), 0.25);
+denoisedImg4 = denoisedImg4.^2 - 3 / 8;
+displayImage(img2, <span class="string">'Original image'</span>);
+displayImage(noisyImg2, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg4, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg4(:) - img2(:)) / norm(img2(:));
+fprintf(<span class="string">"RMSE for stream.png = %f\n"</span>, rmse);
+
+<span class="comment">%  for low exposure image</span>
+
+noisyImg1 = poissrnd(img1 / 20);
+denoisedImg5 = myPCADenoising2(sqrt(noisyImg1 + 3 / 8), 0.25);
+denoisedImg5 = denoisedImg5.^2 - 3 / 8;
+displayImage(img1, <span class="string">'Original image'</span>);
+displayImage(noisyImg1, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg5, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg5(:) - img1(:)) / norm(img1(:));
+fprintf(<span class="string">"RMSE for barbara256.png with low exposure = %f\n"</span>, rmse);
+
+noisyImg2 = poissrnd(img2 / 20);
+denoisedImg5 = myPCADenoising2(sqrt(noisyImg2 + 3 / 8), 0.25);
+denoisedImg5 = denoisedImg5.^2 - 3 / 8;
+displayImage(img2, <span class="string">'Original image'</span>);
+displayImage(noisyImg2, <span class="string">'Noisy image'</span>);
+displayImage(denoisedImg5, <span class="string">'Denoised image'</span>);
+rmse = norm(denoisedImg5(:) - img2(:)) / norm(img2(:));
+fprintf(<span class="string">"RMSE for stream.png with low exposure = %f\n"</span>, rmse);
+</pre><pre class="codeoutput">RMSE for barbara256.png = 0.065712
+RMSE for stream.png = 0.073208
+RMSE for barbara256.png with low exposure = 0.951126
+RMSE for stream.png with low exposure = 0.951416
+</pre><img vspace="5" hspace="5" src="myMainScript_19.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_20.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_21.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_22.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_23.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_24.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_25.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_26.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_27.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_28.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_29.png" alt=""> <img vspace="5" hspace="5" src="myMainScript_30.png" alt=""> <h2 id="8">EXPLANATIONS</h2><pre class="codeinput"><span class="comment">%  * The RMSE for PCA denoising is lesser than that of Bilateral Filtering,</span>
+<span class="comment">%  suggesting that PCA denoising works better than Bilateral Filtering in</span>
+<span class="comment">%  removing Gaussian noise.</span>
+<span class="comment">%  * The difference between PCA denoising and Bilateral Filtering is that</span>
+<span class="comment">%  Bilateral filtering takes the weighted average of nearby pixels having</span>
+<span class="comment">%  similar value whereas PCA-based denoising is actually averaging pixels</span>
+<span class="comment">%  having similar texture by taking patches and comparing them (patch-based</span>
+<span class="comment">%  filtering). The concept of PCA is used to reduce the dimensionality of</span>
+<span class="comment">%  the patch difference vector (computation time increases if the</span>
+<span class="comment">%  dimensionality is increased).</span>
+<span class="comment">%  * A low exposure image with Poisson noise is denoised ineffectively than</span>
+<span class="comment">%  a high exposure image with Poisson noise.</span>
+<span class="comment">%  * If the intensity values are clamped in the range [0, 255] and then</span>
+<span class="comment">%  denoised, then the noise, which was previously uniform Gaussian, is no</span>
+<span class="comment">%  longer uniform due to values being clamped and since PCA denoising uses</span>
+<span class="comment">%  a Wiener-like update of the eigencoefficients which relies on the</span>
+<span class="comment">%  statistical properties of noise as well (independent of the image</span>
+<span class="comment">%  intensities), the denoising is not as efficient as that with uniform</span>
+<span class="comment">%  Gaussian noise.</span>
+</pre><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%  MyMainScript
+
+tic;
+
+%%  Reading the images
+
+img1 = imread('../../barbara256.png');
+img1 = double(img1);
+img2 = imread('../../stream.png');
+img2 = double(img2);
+
+%%  Adding noise to the images
+
+noisyImg1 = img1 + randn(size(img1)) * 20;
+noisyImg2 = img2 + randn(size(img2)) * 20;
+
+%%  Image denoising using PCA (complete image)
+
+denoisedImg1 = myPCADenoising1(noisyImg1, 20);
+displayImage(img1, 'Original image');
+displayImage(noisyImg1, 'Noisy image');
+displayImage(denoisedImg1, 'Denoised image');
+rmse = norm(denoisedImg1(:) - img1(:)) / norm(img1(:));
+fprintf("RMSE for barbara256.png = %f\n", rmse);
+
+denoisedImg1 = myPCADenoising1(noisyImg2, 20);
+displayImage(img2, 'Original image');
+displayImage(noisyImg2, 'Noisy image');
+displayImage(denoisedImg1, 'Denoised image');
+rmse = norm(denoisedImg1(:) - img2(:)) / norm(img2(:));
+fprintf("RMSE for stream.png = %f\n", rmse);
+
+%%  Image denoising using PCA (nearest K = 200 patches)
+
+denoisedImg2 = myPCADenoising2(noisyImg1, 20);
+displayImage(img1, 'Original image');
+displayImage(noisyImg1, 'Noisy image');
+displayImage(denoisedImg2, 'Denoised image');
+rmse = norm(denoisedImg2(:) - img1(:)) / norm(img1(:));
+fprintf("RMSE for barbara256.png = %f\n", rmse);
+
+denoisedImg2 = myPCADenoising2(noisyImg2, 20);
+displayImage(img2, 'Original image');
+displayImage(noisyImg2, 'Noisy image');
+displayImage(denoisedImg2, 'Denoised image');
+rmse = norm(denoisedImg2(:) - img2(:)) / norm(img2(:));
+fprintf("RMSE for stream.png = %f\n", rmse);
+
+%%  Image denoising using Bilateral Filtering
+
+denoisedImg3 = myBilateralFiltering(noisyImg1, 20, 10);
+displayImage(img1, 'Original image');
+displayImage(noisyImg1, 'Noisy image');
+displayImage(denoisedImg3, 'Denoised image');
+rmse = norm(denoisedImg3(:) - img1(:)) / norm(img1(:));
+fprintf("RMSE for barbara256.png = %f\n", rmse);
+
+denoisedImg3 = myBilateralFiltering(noisyImg2, 20, 10);
+displayImage(img2, 'Original image');
+displayImage(noisyImg2, 'Noisy image');
+displayImage(denoisedImg3, 'Denoised image');
+rmse = norm(denoisedImg3(:) - img2(:)) / norm(img2(:));
+fprintf("RMSE for stream.png = %f\n", rmse);
+
+%%  Image denoising using Poisson distribution
+
+noisyImg1 = poissrnd(img1);
+denoisedImg4 = myPCADenoising2(sqrt(noisyImg1 + 3 / 8), 0.25);
+denoisedImg4 = denoisedImg4.^2 - 3 / 8;
+displayImage(img1, 'Original image');
+displayImage(noisyImg1, 'Noisy image');
+displayImage(denoisedImg4, 'Denoised image');
+rmse = norm(denoisedImg4(:) - img1(:)) / norm(img1(:));
+fprintf("RMSE for barbara256.png = %f\n", rmse);
+
+noisyImg2 = poissrnd(img2);
+denoisedImg4 = myPCADenoising2(sqrt(noisyImg2 + 3 / 8), 0.25);
+denoisedImg4 = denoisedImg4.^2 - 3 / 8;
+displayImage(img2, 'Original image');
+displayImage(noisyImg2, 'Noisy image');
+displayImage(denoisedImg4, 'Denoised image');
+rmse = norm(denoisedImg4(:) - img2(:)) / norm(img2(:));
+fprintf("RMSE for stream.png = %f\n", rmse);
+
+%  for low exposure image
+
+noisyImg1 = poissrnd(img1 / 20);
+denoisedImg5 = myPCADenoising2(sqrt(noisyImg1 + 3 / 8), 0.25);
+denoisedImg5 = denoisedImg5.^2 - 3 / 8;
+displayImage(img1, 'Original image');
+displayImage(noisyImg1, 'Noisy image');
+displayImage(denoisedImg5, 'Denoised image');
+rmse = norm(denoisedImg5(:) - img1(:)) / norm(img1(:));
+fprintf("RMSE for barbara256.png with low exposure = %f\n", rmse);
+
+noisyImg2 = poissrnd(img2 / 20);
+denoisedImg5 = myPCADenoising2(sqrt(noisyImg2 + 3 / 8), 0.25);
+denoisedImg5 = denoisedImg5.^2 - 3 / 8;
+displayImage(img2, 'Original image');
+displayImage(noisyImg2, 'Noisy image');
+displayImage(denoisedImg5, 'Denoised image');
+rmse = norm(denoisedImg5(:) - img2(:)) / norm(img2(:));
+fprintf("RMSE for stream.png with low exposure = %f\n", rmse);
+
+%% EXPLANATIONS
+
+%  * The RMSE for PCA denoising is lesser than that of Bilateral Filtering,
+%  suggesting that PCA denoising works better than Bilateral Filtering in
+%  removing Gaussian noise.
+%  * The difference between PCA denoising and Bilateral Filtering is that
+%  Bilateral filtering takes the weighted average of nearby pixels having
+%  similar value whereas PCA-based denoising is actually averaging pixels
+%  having similar texture by taking patches and comparing them (patch-based
+%  filtering). The concept of PCA is used to reduce the dimensionality of
+%  the patch difference vector (computation time increases if the
+%  dimensionality is increased).
+%  * A low exposure image with Poisson noise is denoised ineffectively than
+%  a high exposure image with Poisson noise.
+%  * If the intensity values are clamped in the range [0, 255] and then
+%  denoised, then the noise, which was previously uniform Gaussian, is no
+%  longer uniform due to values being clamped and since PCA denoising uses
+%  a Wiener-like update of the eigencoefficients which relies on the
+%  statistical properties of noise as well (independent of the image
+%  intensities), the denoising is not as efficient as that with uniform
+%  Gaussian noise.
+##### SOURCE END #####
+--></body></html>
